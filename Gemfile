@@ -5,3 +5,5 @@ gemspec
 
 gem 'yard'
 gem 'redcarpet'
+gem 'activerecord'
+gem 'sqlite3'
