@@ -1,6 +1,7 @@
-require "./lib/sinatodo/version"
-require "./lib/sinatodo/command"
-require "./lib/sinatodo/db"
+require "sinatodo/version"
+require "sinatodo/command"
+require "sinatodo/db"
+require "sinatodo/task"
 
 module Sinatodo
   # Your code goes here...
