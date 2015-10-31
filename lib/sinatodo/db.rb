@@ -26,6 +26,8 @@ module Sinatodo
 
       return if connection.table_exists?(:tasks)
 
+			# ここでnull: falseとか書いているけど、これだけだと実際は登録できてしまうので、
+			# Active Recordのvalidatesメソッドでバリデーションを行うことになる。（よくわかってない。）
       connection.create_table :tasks do |t|
         t.column :name, :string, null: false
         t.column :content, :text, null: false
