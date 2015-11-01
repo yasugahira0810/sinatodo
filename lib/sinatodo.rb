@@ -1,5 +1,6 @@
 require "sinatodo/version"
 require "sinatodo/command"
+require "sinatodo/command/options"
 require "sinatodo/db"
 require "sinatodo/task"
 

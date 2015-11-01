@@ -13,6 +13,7 @@ module Sinatodo
   	# コマンドラインベースの処理を行うクラス
   	# @author yasugahira0810
   	def execute
+			options = Options.parse!(@argv)
   		DB.prepare
     end
     
