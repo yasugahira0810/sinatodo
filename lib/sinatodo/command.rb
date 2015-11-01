@@ -1,9 +1,17 @@
 module Sinatodo
 
 	class Command
+
+		def.self.run(argv)
+			new(argv).execute
+		end
+
+		def initialize(argv)
+			@argv = argv
+		end
+
   	# コマンドラインベースの処理を行うクラス
-  	# # @author yasugahira0810
-  	# class Command	
+  	# @author yasugahira0810
   	def execute
   		DB.prepare
     end

@@ -12,3 +12,5 @@ require "sinatodo"
 
 require "irb"
 IRB.start
+
+Sinatodo::Command.run(ARGV)
