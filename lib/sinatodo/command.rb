@@ -3,7 +3,7 @@ module Sinatodo
 	class Command
 
 		def self.run(argv)
-			new(argv).execute
+			new(argv).exec
 		end
 
 		def initialize(argv)
@@ -12,7 +12,7 @@ module Sinatodo
 
   	# コマンドラインベースの処理を行うクラス
   	# @author yasugahira0810
-  	def execute
+  	def exec
 			options = Options.parse!(@argv)
   		DB.prepare
     end
