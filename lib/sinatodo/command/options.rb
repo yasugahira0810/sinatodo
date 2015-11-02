@@ -5,11 +5,20 @@ module Sinatodo
 		module Options
 
 			def self.parse!(argv)
-				{}
-			end
+				command_parser = OptionParser.new do |opt|
+					opt.on_head('-v', '--version', 'Show program version') do |v|
+						opt.version = Sinatodo::VERSION
+						puts opt.ver
+						exit
+					end
+				end
+				
+				command_parser.parse!(argv)
 
-		end
+			end
 		
+		end
+
 	end
 
 end

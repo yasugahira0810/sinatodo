@@ -2,7 +2,7 @@ module Sinatodo
 
 	class Command
 
-		def.self.run(argv)
+		def self.run(argv)
 			new(argv).execute
 		end
 
