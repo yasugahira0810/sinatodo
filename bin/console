@@ -10,7 +10,7 @@ require "sinatodo"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start
+#require "irb"
+#IRB.start
 
 Sinatodo::Command.run(ARGV)
