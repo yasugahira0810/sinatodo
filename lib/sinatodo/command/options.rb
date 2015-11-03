@@ -76,6 +76,10 @@ module Sinatodo
 			def self.create_command_parser
 				# サブコマンド以外の引数の定義
 				OptionParser.new do |opt|
+				# ここって何故イテレータ使っているんだろう？
+				# 以下のように普通にnewして、該当のendをコメントアウトすると、
+				# 15-5終了時点では普通に動くんだけど。
+				# opt = OptionParser.new
 					sub_command_help = [
 						{name: 'create -n name -c content', summary: 'Create Todo Task'},
 						{name: 'update id -n name -c content -s status', summary: 'Update Todo Task'},
