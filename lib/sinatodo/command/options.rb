@@ -8,7 +8,7 @@ module Sinatodo
 				options = {}
 
 				# サブコマンドなどのOptionParserを定義
-				sub_command_parsers = create_sub_command_parsers
+				sub_command_parsers = create_sub_command_parsers(options)
 				command_parser = create_command_parser
 
 				# 引数の解析を行う(解析できない文字列(=サブコマンド)に会うまで処理を続ける)
@@ -32,7 +32,7 @@ module Sinatodo
 
 			end
 
-			def self.create_sub_command_parsers
+			def self.create_sub_command_parsers(options)
   			# サブコマンドの処理をする際に、未定義のkeyを指定されたら例外を発生させる
   			sub_command_parsers = Hash.new do |k, v|
   				raise ArgumentError, "'#{v}' is not sinatodo sub command."
@@ -40,22 +40,36 @@ module Sinatodo
 		
 				# サブコマンド用の定義 
 				sub_command_parsers['create'] = OptionParser.new do |opt|
+					opt.banner = 'Usage: create <args>'
 					opt.on('-n VAL', '--name=VAL', 'task name') { |v| options[:name] = v }
 					opt.on('-c VAL', '--content=VAL', 'task content') { |v| options[:content] = v }
+					opt.on_tail('-h', '--help', 'Show this message') {|v| help_sub_command(opt)}
 				end
 
-				sub_command_parsers['search'] = OptionParser.new do |opt|
-					opt.on('-s VAL', '--status=VAL', 'search status') {|v| options[:status] = v}
+				sub_command_parsers['list'] = OptionParser.new do |opt|
+					opt.banner = 'Usage: list <args>'
+					opt.on('-s VAL', '--status=VAL', 'list status') { |v| options[:name] = v }
+					opt.on_tail('-h', '--help', 'Show this message') {|v| help_sub_command(opt)}
 				end
+
+#				sub_command_parsers['search'] = OptionParser.new do |opt|
+#					opt.on('-s VAL', '--status=VAL', 'search status') {|v| options[:status] = v}
+#				end
 
 				sub_command_parsers['update'] = OptionParser.new do |opt|
+					opt.banner = 'Usage: update id <args>'
 					opt.on('-n VAL', '--name=VAL', 'update name') { |v| options[:name] = v }
 					opt.on('-c VAL', '--content=VAL', 'update content') { |v| options[:content] = v }
 					opt.on('-s VAL', '--status=VAL', 'update status') {|v| options[:status] = v}
+					opt.on_tail('-h', '--help', 'Show this message') {|v| help_sub_command(opt)}
 				end
 
 				sub_command_parsers['delete'] = OptionParser.new do |opt|
+					opt.banner = 'Usage: delete id'
+					opt.on_tail('-h', '--help', 'Show this message') {|v| help_sub_command(opt)}
 				end
+
+				sub_command_parsers
 
 			end
 
@@ -89,7 +103,13 @@ module Sinatodo
 				end
 
 			end
-				
+
+			def self.help_sub_command(parser)
+				puts parser.help
+				exit
+			end
+
+			private_class_method :create_sub_command_parsers, :create_command_parser, :help_sub_command
 		end
 
 	end
