@@ -3,7 +3,7 @@ module Sinatodo
 	class Command
 
 		def self.run(argv)
-			new(argv).exec
+			new(argv).execute
 		end
 
 		def initialize(argv)
@@ -12,11 +12,28 @@ module Sinatodo
 
   	# コマンドラインベースの処理を行うクラス
   	# @author yasugahira0810
-  	def exec
+		def execute
 			options = Options.parse!(@argv)
-  		DB.prepare
-    end
-    
+			sub_command = options.delete(:command)
+
+			DB.prepare
+
+			tasks = case sub_command
+							when 'create'
+								create_task(options[:name], options[:content])
+							when 'delete'
+								delete_task(options[:id])
+							when 'update'
+								update_task(options.delete(:id), options)
+							when 'list'
+								find_tasks(options[:status])
+							end
+			p tasks
+
+		rescue => e
+			abort "Error: #{e.message}"
+		end
+
     def create_task(name, content)
   		# タスク作成時のstatusはデフォルト値が使われNOT_YETとなる
   		Task.create!(name: name, content: content).reload
@@ -46,29 +63,6 @@ module Sinatodo
 			else
 				all_tasks
 			end
-		end
-
-		# executeだと期待通り動かないのでとりあえずexecにした。
-		def exec
-			options = Options.parse!(@argv)
-			sub_command = options.delete(:command)
-
-			DB.prepare
-
-			tasks = case sub_command
-							when 'create'
-								create_task(options[:name], options[:content])
-							when 'delete'
-								delete_task(options[:id])
-							when 'update'
-								update_task(options.delete(:id), options)
-							when 'list'
-								find_tasks(options[:status])
-							end
-			p tasks
-
-		rescue => e
-			abort "Error: #{e.message}"
 		end
 
 		def create_task(name, content)
