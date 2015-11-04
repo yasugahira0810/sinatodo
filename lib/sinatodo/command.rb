@@ -48,8 +48,27 @@ module Sinatodo
 			end
 		end
 
-		def execute
+		# executeだと期待通り動かないのでとりあえずexecにした。
+		def exec
+			options = Options.parse!(@argv)
+			sub_command = options.delete(:command)
+
 			DB.prepare
+
+			tasks = case sub_command
+							when 'create'
+								create_task(options[:name], options[:content])
+							when 'delete'
+								delete_task(options[:id])
+							when 'update'
+								update_task(options.delete(:id), options)
+							when 'list'
+								find_tasks(options[:status])
+							end
+			p tasks
+
+		rescue => e
+			abort "Error: #{e.message}"
 		end
 
 		def create_task(name, content)

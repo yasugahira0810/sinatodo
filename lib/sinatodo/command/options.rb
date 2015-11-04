@@ -20,7 +20,7 @@ module Sinatodo
 					sub_command_parsers[options[:command]].parse!(argv)
 
 					# updateとdeleteの場合はidを取得する
-					if %w(update delete).inclue?(options[:command])
+					if %w(update delete).include?(options[:command])
 						raise ArgumentError, "#{options[:command]} id not found." if argv.empty?
 						options[:id] = Integer(argv.first)
 					end
