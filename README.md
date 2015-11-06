@@ -2,7 +2,6 @@ PerfectRubyのtodoを自分なりに写経したものです。
 pkg配下のgemをインストールする場合、以下の点に注意してください。なお、動作確認はCentOS7.1上で実施しています。  
 
 - gemspecで定義されているgemとは別に、gcc, gcc-c++, make, ruby-devel, sqlite-develあたりのパッケージをインストールしてください。  
-- コマンドのパスが通っていないので、以下のようにスタティックリンクを貼ってください。
 
 		ln /usr/local/share/gems/gems/sinatodo-1.0.0/bin/sinatodo /usr/bin/sinatodo
 
