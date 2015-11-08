@@ -1,11 +1,12 @@
 require 'sinatra/base'
+require 'haml'
 
 module Sinatodo
 
 	class Application < Sinatra::Base
 
 		get '/' do
-			'sinatodo application'
+			haml :index
 		end
 
 	end
