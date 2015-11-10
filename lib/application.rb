@@ -7,6 +7,8 @@ module Sinatodo
 
 	class Application < Sinatra::Base
 
+		set :haml, escape_html: true
+
 		configure do
 			DB.prepare
 		end
