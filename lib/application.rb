@@ -36,8 +36,26 @@ module Sinatodo
 					@status = nil
 				end
 			end
-			
+
 			haml :index
+		end
+
+		post '/tasks' do
+			begin
+				Task.create!(name: params[:name], content: params[:content])
+
+				redirect '/'
+			rescue ActiveRecord::RecordInvalid => e
+				@task = e.record
+
+				haml :new
+			end
+		end
+
+		get '/tasks/new' do
+			@task = Task.new
+
+			haml :new
 		end
 	
 	end
