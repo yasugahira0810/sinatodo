@@ -57,6 +57,12 @@ module Sinatodo
 
 			haml :new
 		end
-	
+
+		get '/tasks/:id/edit' do
+			@task = Task.find(params[:id])
+
+			haml :edit
+		end
+
 	end
 end
