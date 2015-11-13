@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'haml'
-require 'sinatodo/db'
-require 'sinatodo/task'
+require './lib/sinatodo/db'
+require './lib/sinatodo/task'
 
 module Sinatodo
 

@@ -1,10 +1,6 @@
 %h1 Editing Task
 
-- if @task.errors.any?
-  .alert.alert-error
-    %ul
-      - @task.errors.full_messages.each do |msg|
-        %li= msg
+!= haml :_errors, locals: {task: @task}
 
 %form.form-horizontal(method='post'){action: "/tasks/#{@task.id}"}
   .control-group{class: (@task.errors.has_key?(:name) ? 'error' : '')}
