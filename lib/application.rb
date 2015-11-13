@@ -9,6 +9,20 @@ module Sinatodo
 
 		set :haml, escape_html: true
 
+		helpers do
+
+			def options_for_task_status(task)
+				Task::STATUS.map { |key, value| 
+					selected = (value == task.status) ? 'selected' : ''
+					%(<option value="#{value}"#{selected}>#{key}</option>)
+				}.join
+			end
+
+			def error_class(task, name)
+				task.errors.has_key?(name) ? 'error' : ''
+			end
+		end
+
 		configure do
 			DB.prepare
 		end

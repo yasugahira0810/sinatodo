@@ -1,0 +1,17 @@
+.control-group{class: :error_class(task, :name)}
+  %label.control-label(for='task_name') Name
+  .controls
+    %input#task_name.span3(name='name' placeholder='例: 買い物' type='text'){value: @task.name}
+.control-group{class: :error_class(task, :name)}
+  %label.control-label(for='task_content') Content
+  .controls
+    %input#task_content.span5(name='content' placeholder='例: 牛乳を買う' type='text'){value: @task.content}
+- if task.persisted?
+  .control-group
+    %label.control-label(for='task_status') Status
+    .controls
+      %select#task_status(name='status')
+        %option(value='0'){selected: @task.status == 0} NOT_YET
+        %option(value='1'){selected: @task.status == 1} DONE
+        %option(value='2'){selected: @task.status == 2} PENDING
+        .control-group

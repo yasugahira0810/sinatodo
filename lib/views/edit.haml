@@ -3,22 +3,7 @@
 != haml :_errors, locals: {task: @task}
 
 %form.form-horizontal(method='post'){action: "/tasks/#{@task.id}"}
-  .control-group{class: (@task.errors.has_key?(:name) ? 'error' : '')}
-    %label.control-label(for='task_name') Name
+  != haml :_form, locals: {task: @task}
+  %input(name='_method' type='hidden' value='put')
     .controls
-      %input#task_name.span3(name='name' placeholder='例: 買い物' type='text'){value: @task.name}
-  .control-group{class: (@task.errors[:name].empty? ? '': 'error')}
-    %label.control-label(for='task_content') Content
-    .controls
-      %input#task_content.span5(name='content' placeholder='例: 牛乳を買う' type='text'){value: @task.content}
-  .control-group
-    %label.control-label(for='task_status') Status
-    .controls
-      %select#task_status(name='status')
-        %option(value='0'){selected: @task.status == 0} NOT_YET
-        %option(value='1'){selected: @task.status == 1} DONE
-        %option(value='2'){selected: @task.status == 2} PENDING
-        .control-group
-      %input(name='_method' type='hidden' value='put')
-      .controls
-        %input.btn(name='commit' type='submit' value='Update')
+      %input.btn(name='commit' type='submit' value='Update')
