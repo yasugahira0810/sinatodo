@@ -7,6 +7,8 @@ module Sinatodo
 
 	class Application < Sinatra::Base
 
+		use Rack::MethodOverride
+
 		set :haml, escape_html: true
 
 		helpers do
@@ -76,6 +78,23 @@ module Sinatodo
 			@task = Task.find(params[:id])
 
 			haml :edit
+		end
+
+		put '/tasks/:id' do
+			begin
+				task = Task.find(params[:id])
+				task.update_attributes!(
+					name: params[:name],
+					content: params[:content],
+					status: params[:status]
+				)
+
+				redirect '/'
+			rescue ActiveRecord::RecordInvalid => e
+				@task = e.record
+
+				haml :edit
+			end
 		end
 
 	end
