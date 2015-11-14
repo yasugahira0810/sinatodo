@@ -4,6 +4,7 @@
 
 %form.form-horizontal(method='post'){action: "/tasks/#{@task.id}"}
   != haml :_form, locals: {task: @task}
-  %input(name='_method' type='hidden' value='put')
+  .control-group
+    %input(name='_method' type='hidden' value='put')
     .controls
       %input.btn(name='commit' type='submit' value='Update')
