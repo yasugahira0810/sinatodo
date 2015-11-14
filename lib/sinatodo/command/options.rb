@@ -67,7 +67,8 @@ module Sinatodo
 
 				sub_command_parsers['server'] = OptionParser.new do |opt|
 					opt.banner = 'Usage: server <args>'
-					opt.on('-p VAL', '--port=VAL', 'Port(default: 9292)') { |v| options[:port] = v }
+					opt.on('-o VAL', '--host=VAL', 'listen on HOST (default: localhost)') { |v| options[:host] = v }
+					opt.on('-p VAL', '--port=VAL', 'use Port(default: 9292)') { |v| options[:port] = v }
 					opt.on_tail('-h', '--hep', 'Show this message') { |v| help_sub_command(opt) }
 				end
 
@@ -87,7 +88,7 @@ module Sinatodo
 						{name: 'update id -n name -c content -s status', summary: 'Update Todo Task'},
 						{name: 'list -s status', summary: 'List Todo Tasks'},
 						{name: 'delete id', summary: 'Delete Todo Task'},
-						{name: 'server -p port', summary: 'Start http server process'}
+						{name: 'server -o ip -p port', summary: 'Start http server process'}
 					]
 
 					opt.banner = "Usage: #{opt.program_name} [-h|--help][-v|--version]<command>[<args>]"
